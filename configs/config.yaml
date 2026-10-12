@@ -1,0 +1,21 @@
+environment: staging
+application_name: inventory-service
+required_env_vars:
+  - APP_PORT
+  - APP_HOST
+  - API_TOKEN
+  - DB_PASSWORD
+health_checks:
+  - name: homepage
+    url: http://localhost:5000/
+    expected_status: 200
+  - name: health
+    url: http://localhost:5000/health
+    expected_status: 200
+paths:
+  logs_dir: logs
+  reports_dir: reports
+files_required:
+  - configs/config.yaml
+timeouts:
+  request_timeout: 5

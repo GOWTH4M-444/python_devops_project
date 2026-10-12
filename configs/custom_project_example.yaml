@@ -1,0 +1,28 @@
+# Example configuration for checking any custom external project or microservice
+environment: production
+application_name: my-custom-api-service
+
+# Required environment variables that the custom project depends on
+required_env_vars:
+  - MY_APP_ENV
+  - MY_SECRET_KEY
+
+# API endpoints to test (can be local microservices, Docker containers, or live cloud URLs)
+health_checks:
+  - name: user_posts_api
+    url: https://jsonplaceholder.typicode.com/posts/1
+    expected_status: 200
+
+  - name: cloud_gateway_get
+    url: https://httpbin.org/get
+    expected_status: 200
+
+paths:
+  logs_dir: logs
+  reports_dir: reports
+
+files_required:
+  - configs/custom_project_example.yaml
+
+timeouts:
+  request_timeout: 10
